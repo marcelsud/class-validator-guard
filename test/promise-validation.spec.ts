@@ -1,10 +1,10 @@
 import * as assert from 'assert';
 import { Contains, IsDefined, MinLength, ValidateNested, ValidatePromise, ValidationTypes } from 'class-validator';
-import { Guard, Guarded } from '../src';
+import { Guard } from '../src';
 import { GuardedValidationError } from './../src/index';
 
-describe('promise validation', () => {
-  it('should not validate missing nested objects', () => {
+describe('promise validation with Guard creator', () => {
+  it('should not validate missing nested objects', async () => {
     expect.assertions(4);
 
     class MySubClass {
@@ -16,7 +16,6 @@ describe('promise validation', () => {
       }
     }
 
-    @Guarded
     class MyClass {
       @Contains('hello')
       title: string;
@@ -33,7 +32,7 @@ describe('promise validation', () => {
     }
 
     try {
-      new MyClass('helo')
+      await Guard.create(MyClass, 'helo')
     } catch (error) {
       assert(error instanceof GuardedValidationError)
 

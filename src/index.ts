@@ -50,4 +50,13 @@ export abstract class Guard {
     }
     return o;
   }
+
+  static createSync(constructor: Constructor, ...args: any[]) {
+    const o = new constructor(...args);
+    const errors = validateSync(o);
+    if (errors.length > 0) {
+      throw new GuardedValidationError('Validation failed', errors)
+    }
+    return o;
+  }
 }
