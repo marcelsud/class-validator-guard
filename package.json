@@ -1,6 +1,6 @@
 {
   "name": "@marcelsud/class-validator-guard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Guard decorator to automatically validate class properties using class-validator",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
